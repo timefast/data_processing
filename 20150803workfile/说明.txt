@@ -1,0 +1,38 @@
+xiugaiweiwen文件夹：xiugai_weiwen修改的是Z和P的计算以及up_aver_Z和down_aver_Z的计算，
+                    xiugai_wendingdu更进一步修改的是稳定度计算公式
+                    读取了D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_new_jiaodu.txt和real_alltime_sudu.txt
+
+new_jiaodu文件夹：real_new_jiaodu读取了D:\20150803workfile\R\P原始数据，生成了real_alltime_new_jiaodu.txt和real_alltime_sudu.txt
+
+kuoxiantu文件夹：实现了时间范围选择
+                 kuoxiantu读取了D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_sudu.txt和
+                 D:\20150803workfile\new_maidong\real_data_result\all_time_chuizhi.txt，
+                 生成了chuizhibianhu.txt和shuipingpingjun.txt和chuizhipingjun.txt
+
+luoxuandu文件夹：实现了时间范围选择和高度层选择
+                 luoxuandu读取了D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_sudu.txt
+                                D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_new_jiaodu.txt
+                                D:\20150803workfile\new_maidong\real_data_result\all_time_U.txt
+                                D:\20150803workfile\new_maidong\real_data_result\all_time_V.txt
+                           生成了gao_luoxuandu.txt
+                 xiugai_luoxuandu对Cx和Cy分别进行了求均值，生成了xiugai_gao_luoxuandu.txt
+
+new_jiliu文件夹：new_jiliu读取了D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_sudu.txt
+                          生成了di.txt低层最大风速和所在最低高度
+                                zhong.txt中层最大风速和所在最低高度
+                                gao.txt高层最大风速和所在最低高度
+                                jiliuzhishu.txt
+                                12_height.txt风速12米每秒所在最低高度
+                                qiangduzhishu.txt两千米以下最大风速/风速12米每秒所在最低高度
+                                di_jiliuzhishu.txt三千米以下风速12/风速12所在最低高度
+                                gao_jiliuzhishu.txt三千米以上风速20/风速20所在最低高度
+                 xiugai_new_jiliu修改了12米每秒所在最低高度的算法
+
+new_maidong文件夹：real_data_maidong生成all_time_U.txt和all_time_V.txt和all_time_chuizhi.txt
+                                        U_maidong.txt和V_maidong.txt和chuizhi_maidong.txt
+
+new_qiebian文件夹：
+                   new_qiebian读取D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_new_jiaodu.txt和real_alltime_sudu.txt
+                              生成alltime_chuizhi_qiebian.txt和alltime_shuiping_qiebian.txt
+                   select_new_qiebian实现了时间范围选择
+                              生成了selecttime_shuiping_qiebian.txt和selecttime_chuizhi_qiebian.txt
