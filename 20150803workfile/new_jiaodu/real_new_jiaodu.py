@@ -54,7 +54,7 @@ for every_file in os.listdir(root):
 #把time作为index
 all_jiaodu.index = all_time
 all_sudu.index = all_time
-
+#注意修改时间
 rng = pd.date_range(start = '20130628000000', end = '20130630000000', freq='5min')
 
 all_time_jiaodu = all_jiaodu.reindex(rng)

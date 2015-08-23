@@ -17,13 +17,14 @@ jiaodu_df = pd.read_csv(os.path.join(root_sudu,'real_alltime_new_jiaodu.txt'),se
                         iloc[:,1:].replace('/////',np.nan)
 sudu_df = pd.read_csv(os.path.join(root_sudu,'real_alltime_sudu.txt'),sep=',').\
                       iloc[:,1:].replace('/////',np.nan)
-#jiaodu = jiaodu_df.T.values.astype(np.float)
-#sudu = sudu_df.T.values.astype(np.float)
+
 #注意jiaodu和sudu大小均为：99层×577个时刻
 print jiaodu_df
+#注意修改时间起始！！！！##
 rng = pd.date_range(start = '20130628000000', end = '20130630000000', freq='5min')
 sudu_df.index = rng
 jiaodu_df.index = rng
+#注意修改时间窗口！！！
 dti = pd.date_range('20130628000000',periods=10,freq='5min')
 select_sudu = sudu_df.loc[dti].T.values
 select_jiaodu = jiaodu_df.loc[dti].T.values
@@ -47,11 +48,12 @@ cal_fengqiebian_ufunc = np.frompyfunc(cal_fengqiebian,4,1)
 fengqiebian = cal_fengqiebian_ufunc(select_jiaodu[:-3,:],select_jiaodu[3:,:],select_sudu[:-3,:],select_sudu[3:,:])
 
 fengqiebian_df = pd.DataFrame(fengqiebian)
-fengqiebian_df.to_csv(datetime.now().strftime('%H-%M-%S') +'selecttime_chuizhi_qiebian.txt')
+###注意输出文件名，是alltime或selecttime!!!
+fengqiebian_df.T.replace(np.nan,9999).to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'selecttime_chuizhi_qiebian.txt',sep = ' ')
 
 shuiping_fengqiebian = cal_fengqiebian_ufunc(select_jiaodu[:,:-1],select_jiaodu[:,1:],select_sudu[:,:-1],select_sudu[:,1:])
 shuiping_fengqiebian_df = pd.DataFrame(shuiping_fengqiebian)
-shuiping_fengqiebian_df.to_csv(datetime.now().strftime('%H-%M-%S') +'selecttime_shuiping_qiebian.txt')
+shuiping_fengqiebian_df.T.replace(np.nan,9999).to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'selecttime_shuiping_qiebian.txt',sep = ' ')
 
 
 

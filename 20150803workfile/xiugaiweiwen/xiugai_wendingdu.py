@@ -35,7 +35,7 @@ calZ_ufunc = np.frompyfunc(calZ,1,1)
 Z = calZ_ufunc(heightArray)
 #P的type为Object，转换为float
 Z = Z.astype(np.float)
-#print P
+
 def calP(z):
     temp = np.log10((44331 - z) / 44331) / 0.1903
     p = 1013.255 * 10 ** temp 
@@ -49,7 +49,7 @@ deltaP =  P[:-1] - P[1:]
 averP = 0.5 * ( P[:-1] + P[1:] )
 C = (averP / deltaP) *( f / 287.05 )  
 
-#print Z
+
 up_aver_P = 0.5 *( P[1:-1] + P[:-2] )
 down_aver_P = 0.5 *( P[1:-1] + P[2:] )
 
@@ -79,9 +79,9 @@ def calWD(c,sudu1,sudu2,jiaodu1,jiaodu2):
 
 calWD_ufunc = np.frompyfunc(calWD,5,1)
 WD = calWD_ufunc(C,sudu[1:-1,:],sudu[2:,:],jiaodu[1:-1,:],jiaodu[2:,:])
-#print WD 
+
 WDdf = pd.DataFrame(WD)
-WDdf.replace(np.nan,9999).to_csv(datetime.now().strftime('%H-%M-%S') +'alltime_wd.txt')
+WDdf.replace(np.nan,9999).to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'alltime_wd.txt',sep = ' ')
 #NumPy中的乘法运算符 * 指示按元素计算 
 temp = 1000 * WD[1:,:].astype(np.float) / down_aver_P - 1000 * WD[0:-1,:].astype(np.float) / up_aver_P
 delta_z = down_aver_Z - up_aver_Z
@@ -90,15 +90,15 @@ print down_aver_P
 print up_aver_P
 print down_aver_Z
 print up_aver_Z
-#print result
+
 result_df = pd.DataFrame(result)
-result_df.to_csv(datetime.now().strftime('%H-%M-%S') +'xiugai_alltime_wendingdu.txt')
+result_df.replace(np.nan,9999).T.to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'xiugai_alltime_wendingdu.txt',sep = ' ')
 P_df = pd.DataFrame(P)
-P_df.to_csv(datetime.now().strftime('%H-%M-%S') +'P.txt')
+P_df.to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'P.txt')
 Z_df = pd.DataFrame(Z)
-Z_df.to_csv(datetime.now().strftime('%H-%M-%S') +'Z.txt')
+Z_df.to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'Z.txt')
 height_df = pd.DataFrame(heightArray)
-height_df.to_csv(datetime.now().strftime('%H-%M-%S') +'height.txt')
-#np.savetxt('heightArray.txt',heightArray)
+height_df.to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'height.txt')
+
 
 
