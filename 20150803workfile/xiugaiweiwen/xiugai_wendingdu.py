@@ -10,7 +10,10 @@ Created on Wed Aug 05 17:54:08 2015
 import pandas as pd
 import numpy as np
 import os
+from datetime import datetime
 
+current_path = os.getcwd()
+root = os.path.join(os.path.dirname(current_path),'new_jiaodu/real_data_result')
 #初始化速度和角度以高度层
 height_df=pd.DataFrame({'Height':range(100,6000,60)})
 #获得高度矩阵
@@ -61,8 +64,8 @@ up_aver_Z = up_aver_Z.astype(np.float)
 down_aver_Z = calaverz_ufunc(down_aver_P)
 down_aver_Z = down_aver_Z.astype(np.float)
 
-jiaodu_df = pd.read_csv(r'D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_new_jiaodu.txt',sep=',').replace('/////',np.nan)
-sudu_df = pd.read_csv(r'D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_sudu.txt',sep=',').replace('/////',np.nan)   
+jiaodu_df = pd.read_csv(os.path.join(root,'real_alltime_new_jiaodu.txt'),sep=',').replace('/////',np.nan)
+sudu_df = pd.read_csv(os.path.join(root,'real_alltime_sudu.txt'),sep=',').replace('/////',np.nan)   
 jiaodu = jiaodu_df.T.values
 sudu = sudu_df.T.values
 #注意jiaodu和sudu大小均为：（1层日期+99层）×577个时刻
@@ -78,7 +81,7 @@ calWD_ufunc = np.frompyfunc(calWD,5,1)
 WD = calWD_ufunc(C,sudu[1:-1,:],sudu[2:,:],jiaodu[1:-1,:],jiaodu[2:,:])
 #print WD 
 WDdf = pd.DataFrame(WD)
-WDdf.replace(np.nan,9999).to_csv('alltime_wd.txt')
+WDdf.replace(np.nan,9999).to_csv(datetime.now().strftime('%H-%M-%S') +'alltime_wd.txt')
 #NumPy中的乘法运算符 * 指示按元素计算 
 temp = 1000 * WD[1:,:].astype(np.float) / down_aver_P - 1000 * WD[0:-1,:].astype(np.float) / up_aver_P
 delta_z = down_aver_Z - up_aver_Z
@@ -89,13 +92,13 @@ print down_aver_Z
 print up_aver_Z
 #print result
 result_df = pd.DataFrame(result)
-result_df.to_csv('xiugai_alltime_wendingdu.txt')
+result_df.to_csv(datetime.now().strftime('%H-%M-%S') +'xiugai_alltime_wendingdu.txt')
 P_df = pd.DataFrame(P)
-P_df.to_csv('P.txt')
+P_df.to_csv(datetime.now().strftime('%H-%M-%S') +'P.txt')
 Z_df = pd.DataFrame(Z)
-Z_df.to_csv('Z.txt')
+Z_df.to_csv(datetime.now().strftime('%H-%M-%S') +'Z.txt')
 height_df = pd.DataFrame(heightArray)
-height_df.to_csv('height.txt')
-np.savetxt('heightArray.txt',heightArray)
+height_df.to_csv(datetime.now().strftime('%H-%M-%S') +'height.txt')
+#np.savetxt('heightArray.txt',heightArray)
 
 

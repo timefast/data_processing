@@ -9,8 +9,9 @@ import os
 import pandas as pd
 import numpy as np
 
-root = r'D:\20150803workfile\R\P'
-outpath = r'D:\20150803workfile\new_jiaodu\real_data_result'
+current_path = os.getcwd()
+root = os.path.join(os.path.dirname(current_path),'R/P')
+outpath = os.path.join(os.path.dirname(current_path),'new_jiaodu/real_data_result')
 
 all_jiaodu = pd.DataFrame()
 all_sudu = pd.DataFrame()
