@@ -8,12 +8,14 @@ Created on Mon Aug 03 14:59:37 2015
 import pandas as pd
 import numpy as np
 import os
+from datetime import datetime
 
-outpath = r'D:\20150803workfile\new_weiwen'
+current_path = os.getcwd()
+root_sudu = os.path.join(os.path.dirname(current_path),'new_jiaodu/real_data_result')
 
-jiaodu_df = pd.read_csv(r'D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_new_jiaodu.txt',sep=',').\
+jiaodu_df = pd.read_csv(os.path.join(root_sudu,'real_alltime_new_jiaodu.txt'),sep=',').\
                         iloc[:,1:].replace('/////',np.nan)
-sudu_df = pd.read_csv(r'D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_sudu.txt',sep=',').\
+sudu_df = pd.read_csv(os.path.join(root_sudu,'real_alltime_sudu.txt'),sep=',').\
                       iloc[:,1:].replace('/////',np.nan)
 #jiaodu = jiaodu_df.T.values.astype(np.float)
 #sudu = sudu_df.T.values.astype(np.float)
@@ -45,11 +47,11 @@ cal_fengqiebian_ufunc = np.frompyfunc(cal_fengqiebian,4,1)
 fengqiebian = cal_fengqiebian_ufunc(select_jiaodu[:-3,:],select_jiaodu[3:,:],select_sudu[:-3,:],select_sudu[3:,:])
 
 fengqiebian_df = pd.DataFrame(fengqiebian)
-fengqiebian_df.to_csv('selecttime_chuizhi_qiebian.txt')
+fengqiebian_df.to_csv(datetime.now().strftime('%H-%M-%S') +'selecttime_chuizhi_qiebian.txt')
 
 shuiping_fengqiebian = cal_fengqiebian_ufunc(select_jiaodu[:,:-1],select_jiaodu[:,1:],select_sudu[:,:-1],select_sudu[:,1:])
 shuiping_fengqiebian_df = pd.DataFrame(shuiping_fengqiebian)
-shuiping_fengqiebian_df.to_csv('selecttime_shuiping_qiebian.txt')
+shuiping_fengqiebian_df.to_csv(datetime.now().strftime('%H-%M-%S') +'selecttime_shuiping_qiebian.txt')
 
 
 

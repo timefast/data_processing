@@ -8,10 +8,13 @@ Created on Sun Aug 02 16:51:58 2015
 import os
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
-root = r'D:\20150803workfile\R\P'
-
-outpath = r'D:\20150803workfile\new_maidong\real_data_result'
+current_path = os.getcwd()
+root = os.path.join(os.path.dirname(current_path),'R/P')
+#root = r'D:\20150803workfile\R\P'
+outpath = os.path.join(os.path.dirname(current_path),'new_maidong/real_data_result')
+#outpath = r'D:\20150803workfile\new_maidong\real_data_result'
 
 all_U = pd.DataFrame()
 all_V = pd.DataFrame()
@@ -81,9 +84,9 @@ def cal_maidong(df):
 U_maidong = cal_maidong(all_time_U)
 V_maidong = cal_maidong(all_time_V)
 chuizhi_maidong = cal_maidong(all_time_chuizhi)
-U_maidong['20130628000000':'20130630000000'].to_csv(os.path.join(outpath,'U_maidong.txt'))
-V_maidong['20130628000000':'20130630000000'].to_csv(os.path.join(outpath,'V_maidong.txt'))
-chuizhi_maidong['20130628000000':'20130630000000'].to_csv(os.path.join(outpath,'chuizhi_maidong.txt'))
+U_maidong['20130628000000':'20130630000000'].to_csv(os.path.join(outpath,datetime.now().strftime('%H-%M-%S') +'U_maidong.txt'))
+V_maidong['20130628000000':'20130630000000'].to_csv(os.path.join(outpath,datetime.now().strftime('%H-%M-%S') +'V_maidong.txt'))
+chuizhi_maidong['20130628000000':'20130630000000'].to_csv(os.path.join(outpath,datetime.now().strftime('%H-%M-%S') +'chuizhi_maidong.txt'))
 
 
 

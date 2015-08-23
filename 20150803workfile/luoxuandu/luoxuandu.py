@@ -7,19 +7,26 @@ Created on Tue Aug 04 16:40:23 2015
 
 import pandas as pd
 import numpy as np
+import os 
+from datetime import datetime
+
+current_path = os.getcwd()
+root_sudu = os.path.join(os.path.dirname(current_path),'new_jiaodu/real_data_result')
+root_U = os.path.join(os.path.dirname(current_path),'new_maidong/real_data_result')
+
 
 outpath = r'D:\20150803workfile\new_weiwen'
 
-sudu_df = pd.read_csv(r'D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_sudu.txt',sep=',')\
+sudu_df = pd.read_csv(os.path.join(root_sudu,'real_alltime_sudu.txt'),sep=',')\
           .iloc[:,1:].replace('/////',np.nan)
-jiaodu_df = pd.read_csv(r'D:\20150803workfile\new_jiaodu\real_data_result\real_alltime_new_jiaodu.txt',sep=',')\
+jiaodu_df = pd.read_csv(os.path.join(root_sudu,'real_alltime_new_jiaodu.txt'),sep=',')\
           .iloc[:,1:].replace('/////',np.nan)
           
-U = pd.read_csv(r'D:\20150803workfile\new_maidong\real_data_result\all_time_U.txt',sep=',')\
+U = pd.read_csv(os.path.join(root_U,'all_time_U.txt'),sep=',')\
           .iloc[:,1:].replace('/////',np.nan)
 U_df = U[:577]
 
-V = pd.read_csv(r'D:\20150803workfile\new_maidong\real_data_result\all_time_V.txt',sep=',')\
+V = pd.read_csv(os.path.join(root_U,'all_time_V.txt'),sep=',')\
           .iloc[:,1:].replace('/////',np.nan)
 V_df = V[:577]
 #注意sudu_df大小均为：577个时刻*99层
@@ -93,4 +100,4 @@ print luoxuandu
     
 luoxuandu_df = pd.DataFrame(luoxuandu)
 luoxuandu_df.index = dti
-luoxuandu_df.to_csv('test_gao_luoxuandu.txt')
+luoxuandu_df.to_csv(datetime.now().strftime('%H-%M-%S') +'gao_luoxuandu.txt')
