@@ -43,13 +43,18 @@ def cal_fengqiebian(jiaodu1,jiaodu2,sudu1,sudu2):
     print result
                  
     return result
-
+    
 cal_fengqiebian_ufunc = np.frompyfunc(cal_fengqiebian,4,1)
 fengqiebian = cal_fengqiebian_ufunc(select_jiaodu[:-3,:],select_jiaodu[3:,:],select_sudu[:-3,:],select_sudu[3:,:])
 
+fengqiebian_nofangxiang  = select_sudu[:-3,:] - select_sudu[3:,:]
+
 fengqiebian_df = pd.DataFrame(fengqiebian)
+fengqiebian_nofangxiang_df = pd.DataFrame(fengqiebian_nofangxiang)
+
 ###注意输出文件名，是alltime或selecttime!!!
 fengqiebian_df.T.replace(np.nan,9999).to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'selecttime_chuizhi_qiebian.txt',sep = ' ')
+fengqiebian_nofangxiang_df.T.replace(np.nan,9999).to_csv(datetime.now().strftime('%m-%d-%H-%M-%S') +'selecttime_chuizhi_qiebian_nofangxiang.txt',sep = ' ')
 
 shuiping_fengqiebian = cal_fengqiebian_ufunc(select_jiaodu[:,:-1],select_jiaodu[:,1:],select_sudu[:,:-1],select_sudu[:,1:])
 shuiping_fengqiebian_df = pd.DataFrame(shuiping_fengqiebian)
