@@ -59,9 +59,9 @@ def cal_single(u1,u2,v1,v2,cx,cy):
     return result
 
 cal_single_ufunc = np.frompyfunc(cal_single,6,1)
-single_luoxuandu = cal_single_ufunc(select_U.loc['20130628001000'][:-1],select_U.loc['20130628001000'][1:],\
-                                    select_V.loc['20130628001000'][:-1],select_V.loc['20130628001000'][1:],Cx,Cy)
-print single_luoxuandu
+#single_luoxuandu = cal_single_ufunc(select_U.loc['20130628001000'][:-1],select_U.loc['20130628001000'][1:],\
+#                                    select_V.loc['20130628001000'][:-1],select_V.loc['20130628001000'][1:],Cx,Cy)
+#print single_luoxuandu
 
 luoxuandu = []
 
