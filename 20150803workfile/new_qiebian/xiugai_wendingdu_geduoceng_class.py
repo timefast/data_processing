@@ -45,7 +45,7 @@ calP_ufunc = np.frompyfunc(calP,1,1)
 P = calP_ufunc(Z)
 P = P.astype(np.float)
 
-select_P = P[::5]
+select_P = P[::6]
 
 deltaP =  select_P[:-1] - select_P[1:]
 averP = 0.5 * ( select_P[:-1] + select_P[1:] )
@@ -74,10 +74,10 @@ sudu_df = pd.read_csv(os.path.join(root,'real_alltime_sudu.txt'),sep=',').replac
 
 jiaodu = jiaodu_df.T.values
 #print jiaodu
-select_jiaodu = jiaodu[1::5,:]
+select_jiaodu = jiaodu[1::6,:]
 #print select_jiaodu[:3,:]
 sudu = sudu_df.T.values
-select_sudu = sudu[1::5,:]
+select_sudu = sudu[1::6,:]
 #注意jiaodu和sudu大小均为：（1层日期+99层）×577个时刻
 
 #定义位温计算函数，用到数组的元素级别计算
